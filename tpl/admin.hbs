@@ -1,0 +1,33 @@
+<div>
+	<h1>Приветствуем {{name}}</h1>
+	<div>
+		<p>Вы администратор</p>
+		<hr>
+
+		<button id = "addNewUser">Добавить пользователя</button>
+
+	</div>
+
+	<form id="addUserForm" class="hiden">
+	  <div>
+	    <input type="text" name="first_name" placeholder="Enter name" required id="adminLogin" class="box">
+	  </div>
+	  <div>
+	    <input type="password" name="password" placeholder="password" required id="adminPassword" class="box">
+	  </div>
+	  <div>
+	    <input type="checkbox" name="checkbox" id="checkbox" class="box">
+	    <label for="checkbox"> админинистратор</label>
+	  </div>
+
+	  <button id="submit">Ok</button>
+	</form>
+	<hr>
+	
+	<button id="showQuestionForm">Добавить новый вопрос</button>
+		
+	<form id="addQuestion" class="hiden">
+		добавить новый вопрос
+	</form>
+	
+</div>
