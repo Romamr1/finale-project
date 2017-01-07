@@ -1,8 +1,8 @@
-import loginTemplate from '../tpl/login.hbs';
-import {elem} from './createElement';
+import loginTemplate from './login.page.hbs';
+import {elem} from '../createElement';
 //import {users} from './mockUsers';
-import {renderUser} from "./user";
-import {renderAdmin} from "./admin";
+import {renderUser} from "../user";
+import {renderAdmin} from "../admin";
 
 let users = [];
 
@@ -73,8 +73,34 @@ export function loadUser(){
       
       }
     }
-  xmlhttp.open("Get","http://localhost:3001/users",true);
+  xmlhttp.open("Get","/users",true);
   xmlhttp.send();
   
 }
 
+
+function render(){
+	make_request('Get', '/users', function(data){
+		users = data;
+		loginPage();
+	});
+}
+
+
+function make_request(method, endpoint, cb){
+  const xmlhttp =new XMLHttpRequest();
+  xmlhttp.onreadystatechange= onreadystatechange; 
+  xmlhttp.open(method, endpoint, true);
+  xmlhttp.send();
+
+  function onreadystatechange(){
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      
+      const data = JSON.parse(xmlhttp.responseText);
+      cb(data);
+      
+    }
+  }
+}
+
+export default { render };

@@ -39,6 +39,6 @@ res.send();
 	//console.log('req',req.body);
 });
 
-var server = app.listen(3001, function () {
+var server = app.listen(3000, function () {
   console.log('backend started');
 });

@@ -7,7 +7,7 @@ export function postUser(){
         console.log(JSON.stringify(xmlhttp.responseText));
       }
     }
-  xmlhttp.open("POST","http://localhost:3001/users",true);
+  xmlhttp.open("POST","/users",true);
   var user = {name: "name"};
   var r = JSON.stringify(user);
   xmlhttp.send(r);
@@ -36,7 +36,7 @@ export function loadXMLDoc(){
       
       }
     }
-  xmlhttp.open("Get","http://localhost:3001/users",true);
+  xmlhttp.open("Get","/users",true);
   xmlhttp.send();
   
 }

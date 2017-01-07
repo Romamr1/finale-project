@@ -124,7 +124,7 @@ function loadQuestion(){
       
       }
     }
-  xmlhttp.open("Get","http://localhost:3001/questions",true);
+  xmlhttp.open("Get","/questions",true);
   xmlhttp.send();
   
 }
