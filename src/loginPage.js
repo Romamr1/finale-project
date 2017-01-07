@@ -1,11 +1,15 @@
 import loginTemplate from '../tpl/login.hbs';
 import {elem} from './createElement';
-import {users} from './mockUsers';
+//import {users} from './mockUsers';
 import {renderUser} from "./user";
 import {renderAdmin} from "./admin";
 
+let users = [];
+
 export var curentUser = {};
-export function loginPage () {
+
+export function loginPage () {	
+
 	let mainPage = elem.getLink('container');
  	mainPage.innerHTML = loginTemplate();
 
@@ -45,4 +49,32 @@ function chekData(login, password){
 	user.message = message;
 	return user;		
 };
+
+export function loadUser(){
+   
+
+  var xmlhttp;
+  if (window.XMLHttpRequest)
+    {// код для IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+    }
+  else
+    {// код для IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  xmlhttp.onreadystatechange=function()
+    {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+      {
+      
+      users = JSON.parse(xmlhttp.responseText);
+      //console.log(users);
+      loginPage ();
+      
+      }
+    }
+  xmlhttp.open("Get","http://localhost:3001/users",true);
+  xmlhttp.send();
+  
+}
 

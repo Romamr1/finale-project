@@ -1,4 +1,7 @@
 import {renderQuestionPage} from "./render";
-import {loginPage} from "./loginPage";
+import {loadUser} from "./loginPage";
+import {postUser} from "./http";
+
+//postUser();
 //renderQuestionPage();
-loginPage();
+loadUser();

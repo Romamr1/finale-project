@@ -48,10 +48,15 @@
 
 	var _render = __webpack_require__(1);
 
-	var _loginPage = __webpack_require__(27);
+	var _loginPage = __webpack_require__(26);
 
+	var _http = __webpack_require__(30);
+
+	debugger;
+
+	(0, _http.postUser)();
 	//renderQuestionPage();
-	(0, _loginPage.loginPage)();
+	//loadUser();
 
 /***/ },
 /* 1 */
@@ -73,17 +78,19 @@
 
 	var _question2 = _interopRequireDefault(_question);
 
-	var _mock = __webpack_require__(23);
+	var _createElement = __webpack_require__(23);
 
-	var _createElement = __webpack_require__(24);
-
-	var _user = __webpack_require__(25);
+	var _user = __webpack_require__(24);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//import {questions} from './mock';
+	var questions = [];
 
 	var resoltQustion = exports.resoltQustion = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 	function renderQuestionPage(curentUser) {
+		loadQuestion();
 		var mainPage = _createElement.elem.getLink('container');
 		mainPage.innerHTML = (0, _main2.default)();
 
@@ -116,15 +123,15 @@
 	function renderQuestion(j) {
 
 		var questionText = _createElement.elem.getLink('question');
-		questionText.innerHTML = (0, _question2.default)(_mock.questions[j]);
+		questionText.innerHTML = (0, _question2.default)(questions[j]);
 
 		var ul = _createElement.elem.getLink('answers');
 		ul.innerHTML = '';
 		var form = _createElement.elem.getLink('options');
 		form.addEventListener('submit', OnSubmit);
 
-		for (var key in _mock.questions[j].answer) {
-			_createElement.elem.createAnswer(ul, _mock.questions[j], 'name', key);
+		for (var key in questions[j].answer) {
+			_createElement.elem.createAnswer(ul, questions[j], 'name', key);
 		}
 
 		function OnSubmit(event) {
@@ -132,24 +139,24 @@
 			var answers = document.querySelectorAll('li input');
 			var resolt = 0;
 			var count = 0;
-			_mock.questions[j].curentCheck = '';
+			questions[j].curentCheck = '';
 			for (var i = 0; i < answers.length; i++) {
 				if (answers[i].checked === true) {
 
-					for (var _key in _mock.questions[j].rightAnswer) {
+					for (var _key in questions[j].rightAnswer) {
 						if (answers[i].value === _key) {
-							_mock.questions[j].curentCheck += _key;
+							questions[j].curentCheck += _key;
 						}
 					}
 				}
 			}
 
-			for (var _key2 in _mock.questions[j].rightAnswer) {
+			for (var _key2 in questions[j].rightAnswer) {
 				count++;
 
 				for (var i = 0; i < answers.length; i++) {
 					if (answers[i].value === _key2) {
-						if (answers[i].checked === _mock.questions[j].rightAnswer[_key2]) {
+						if (answers[i].checked === questions[j].rightAnswer[_key2]) {
 							resolt++;
 						}
 						break;
@@ -163,6 +170,28 @@
 				resoltQustion[j] = 0;
 			}
 		}
+	}
+
+	function loadQuestion() {
+
+		var xmlhttp;
+		if (window.XMLHttpRequest) {
+			// код для IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			// код для IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function () {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+				questions = JSON.parse(xmlhttp.responseText);
+				//console.log(users);
+
+			}
+		};
+		xmlhttp.open("Get", "http://localhost:3001/questions", true);
+		xmlhttp.send();
 	}
 
 /***/ },
@@ -1389,132 +1418,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var questions = exports.questions = [{
-		id: 1,
-		question: 'Укажите имя функции округления вверх?',
-		answerType: 'radio',
-		answer: {
-			a: 'ceil',
-			b: 'math.ceil',
-			c: 'Math.ceil',
-			d: 'math.ceil()',
-			e: 'ceil()'
-		},
-		rightAnswer: { a: false, b: false, c: true, d: false, e: false },
-		curentCheck: ''
-	}, {
-		id: 2,
-		question: 'Укажите все способы указания комментариев в javascript-коде.',
-		answerType: 'checkbox',
-		answer: {
-			a: '/* комментарий */',
-			b: '//комментарий',
-			c: '\\\\комментарий',
-			d: '<!-- комментарий -->',
-			e: '; комментарий'
-		},
-		rightAnswer: { a: true, b: true, c: false, d: false, e: false },
-		curentCheck: ''
-	}, {
-		id: 3,
-		question: 'Как правильно написать "Hello World" в окне предупреждения (alert box)?',
-		answerType: 'radio',
-		answer: {
-			a: 'alertBox("Hello World");',
-			b: 'msg("Hello World");',
-			c: 'alert("Hello World");',
-			d: 'msgBox("Hello World");'
-		},
-		rightAnswer: { a: false, b: false, c: true, d: false },
-		curentCheck: ''
-	}, {
-		id: 4,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}, {
-		id: 5,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}, {
-		id: 6,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}, {
-		id: 7,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}, {
-		id: 8,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}, {
-		id: 9,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}, {
-		id: 10,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: {
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: { a: true, b: false, c: true },
-		curentCheck: ''
-	}];
-
-/***/ },
-/* 24 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
 	var elem = exports.elem = {
 
 		createAnswer: function createAnswer(parent, data, name, value) {
@@ -1551,7 +1454,7 @@
 	};
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1561,11 +1464,11 @@
 	});
 	exports.renderUser = renderUser;
 
-	var _user = __webpack_require__(26);
+	var _user = __webpack_require__(25);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _createElement = __webpack_require__(24);
+	var _createElement = __webpack_require__(23);
 
 	var _render = __webpack_require__(1);
 
@@ -1586,7 +1489,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(3);
@@ -1600,75 +1503,101 @@
 	},"useData":true});
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	exports.curentUser = undefined;
 	exports.loginPage = loginPage;
+	exports.loadUser = loadUser;
 
-	var _login = __webpack_require__(28);
+	var _login = __webpack_require__(27);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _createElement = __webpack_require__(24);
+	var _createElement = __webpack_require__(23);
 
-	var _mockUsers = __webpack_require__(29);
+	var _user = __webpack_require__(24);
 
-	var _user = __webpack_require__(25);
-
-	var _admin = __webpack_require__(30);
+	var _admin = __webpack_require__(28);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var curentUser = exports.curentUser = {};
-	function loginPage() {
-		var mainPage = _createElement.elem.getLink('container');
-		mainPage.innerHTML = (0, _login2.default)();
+	//import {users} from './mockUsers';
+	var users = [];
 
-		var form = _createElement.elem.getLink('loginForm');
-		form.addEventListener('submit', ONSubmit);
+	var curentUser = exports.curentUser = {};
+
+	function loginPage() {
+
+	  var mainPage = _createElement.elem.getLink('container');
+	  mainPage.innerHTML = (0, _login2.default)();
+
+	  var form = _createElement.elem.getLink('loginForm');
+	  form.addEventListener('submit', ONSubmit);
 	}
 
 	function ONSubmit(event) {
-		event.preventDefault();
+	  event.preventDefault();
 
-		var login = document.getElementById("login").value + '';
-		var password = document.getElementById("password").value + '';
-		var resalt = chekData(login, password);
-		if (resalt.admin) {
-			exports.curentUser = curentUser = resalt;
-			(0, _admin.renderAdmin)(resalt);
-		} else if (resalt.name) {
-			exports.curentUser = curentUser = resalt;
-			(0, _user.renderUser)(resalt);
-		} else {
-			container.innerHTML = resalt.message;
-		}
+	  var login = document.getElementById("login").value + '';
+	  var password = document.getElementById("password").value + '';
+	  var resalt = chekData(login, password);
+	  if (resalt.admin) {
+	    exports.curentUser = curentUser = resalt;
+	    (0, _admin.renderAdmin)(resalt);
+	  } else if (resalt.name) {
+	    exports.curentUser = curentUser = resalt;
+	    (0, _user.renderUser)(resalt);
+	  } else {
+	    container.innerHTML = resalt.message;
+	  }
 	}
 
 	function chekData(login, password) {
-		var message = '';
-		var user = {};
-		for (var i = _mockUsers.users.length - 1; i >= 0; i--) {
-			if (_mockUsers.users[i].name === login && _mockUsers.users[i].password === password) {
-				message = 'You successfully login!!! Welcome ' + _mockUsers.users[i].name;
-				user = _mockUsers.users[i];
-				break;
-			} else {
-				message = 'Check the login and password!!! You are not logged in!';
-			}
-		}
-		user.message = message;
-		return user;
+	  var message = '';
+	  var user = {};
+	  for (var i = users.length - 1; i >= 0; i--) {
+	    if (users[i].name === login && users[i].password === password) {
+	      message = 'You successfully login!!! Welcome ' + users[i].name;
+	      user = users[i];
+	      break;
+	    } else {
+	      message = 'Check the login and password!!! You are not logged in!';
+	    }
+	  }
+	  user.message = message;
+	  return user;
 	};
 
+	function loadUser() {
+
+	  var xmlhttp;
+	  if (window.XMLHttpRequest) {
+	    // код для IE7+, Firefox, Chrome, Opera, Safari
+	    xmlhttp = new XMLHttpRequest();
+	  } else {
+	    // код для IE6, IE5
+	    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	  xmlhttp.onreadystatechange = function () {
+	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+	      users = JSON.parse(xmlhttp.responseText);
+	      //console.log(users);
+	      loginPage();
+	    }
+	  };
+	  xmlhttp.open("Get", "http://localhost:3001/users", true);
+	  xmlhttp.send();
+	}
+
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(3);
@@ -1678,30 +1607,7 @@
 	},"useData":true});
 
 /***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var users = exports.users = [{
-		name: 'vasia',
-		password: 'vasia',
-		admin: true
-	}, {
-		name: 'petia',
-		password: 'petia',
-		admin: false
-	}, {
-		name: 'mashia',
-		password: '12345',
-		admin: false
-	}];
-
-/***/ },
-/* 30 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1711,13 +1617,17 @@
 	});
 	exports.renderAdmin = renderAdmin;
 
-	var _admin = __webpack_require__(31);
+	var _admin = __webpack_require__(29);
 
 	var _admin2 = _interopRequireDefault(_admin);
 
-	var _createElement = __webpack_require__(24);
+	var _createElement = __webpack_require__(23);
+
+	var _http = __webpack_require__(30);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	(0, _http.loadXMLDoc)();
 
 	var curentUser = {};
 
@@ -1739,7 +1649,7 @@
 
 	function showForm(event) {
 
-		loadXMLDoc();
+		console.log(_http.loadXMLDoc.users);
 
 		var addUserForm = document.getElementById('addQuestion');
 		if (addUserForm.classList.contains("hiden")) {
@@ -1759,27 +1669,8 @@
 		}
 	}
 
-	function loadXMLDoc() {
-
-		var xmlhttp;
-		if (window.XMLHttpRequest) {
-			// код для IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {
-			// код для IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function () {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				console.log(JSON.parse(xmlhttp.responseText));
-			}
-		};
-		xmlhttp.open("Get", "http://localhost:3001/users", true);
-		xmlhttp.send();
-	}
-
 /***/ },
-/* 31 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Handlebars = __webpack_require__(3);
@@ -1791,6 +1682,52 @@
 	    + container.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"name","hash":{},"data":data}) : helper)))
 	    + "</h1>\n	<div>\n		<p>Вы администратор</p>\n		<hr>\n\n		<button id = \"addNewUser\">Добавить пользователя</button>\n\n	</div>\n\n	<form id=\"addUserForm\" class=\"hiden\">\n	  <div>\n	    <input type=\"text\" name=\"first_name\" placeholder=\"Enter name\" required id=\"adminLogin\" class=\"box\">\n	  </div>\n	  <div>\n	    <input type=\"password\" name=\"password\" placeholder=\"password\" required id=\"adminPassword\" class=\"box\">\n	  </div>\n	  <div>\n	    <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" class=\"box\">\n	    <label for=\"checkbox\"> админинистратор</label>\n	  </div>\n\n	  <button id=\"submit\">Ok</button>\n	</form>\n	<hr>\n	\n	<button id=\"showQuestionForm\">Добавить новый вопрос</button>\n		\n	<form id=\"addQuestion\" class=\"hiden\">\n		добавить новый вопрос\n	</form>\n	\n</div>\n";
 	},"useData":true});
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.postUser = postUser;
+	exports.loadXMLDoc = loadXMLDoc;
+	function postUser() {
+	  var xmlhttp = new XMLHttpRequest();
+	  xmlhttp.onreadystatechange = function () {
+	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+	      console.log(JSON.stringify(xmlhttp.responseText));
+	    }
+	  };
+	  xmlhttp.open("POST", "http://localhost:3001/users", true);
+	  var user = { name: "name" };
+	  var r = JSON.stringify(user);
+	  debugger;
+	  xmlhttp.send(r);
+	}
+
+	function loadXMLDoc() {
+
+	  var xmlhttp;
+	  if (window.XMLHttpRequest) {
+	    // код для IE7+, Firefox, Chrome, Opera, Safari
+	    xmlhttp = new XMLHttpRequest();
+	  } else {
+	    // код для IE6, IE5
+	    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	  xmlhttp.onreadystatechange = function () {
+	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+	      loadXMLDoc.users = JSON.parse(xmlhttp.responseText);
+	    }
+	  };
+	  xmlhttp.open("Get", "http://localhost:3001/users", true);
+	  xmlhttp.send();
+	}
 
 /***/ }
 /******/ ]);

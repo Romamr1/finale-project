@@ -1,7 +1,10 @@
 import adminTemplate from '../tpl/admin.hbs';
 import {elem} from './createElement';
+import {loadXMLDoc} from './http';
+loadXMLDoc();
 
 let curentUser = {};
+
 
 export function renderAdmin(user){
 	
@@ -19,8 +22,9 @@ export function renderAdmin(user){
 };
 
 function showForm(event){
-	
-	loadXMLDoc();			
+
+		
+	console.log(loadXMLDoc.users);		
 	
 	var addUserForm = document.getElementById('addQuestion');
 	if (addUserForm.classList.contains("hiden")) {
@@ -42,24 +46,3 @@ function addUserForm(event){
 
 }
 
-function loadXMLDoc(){
-
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// код для IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// код для IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    console.log(JSON.parse(xmlhttp.responseText));
-    }
-  }
-xmlhttp.open("Get","http://localhost:3001/users",true);
-xmlhttp.send();
-}

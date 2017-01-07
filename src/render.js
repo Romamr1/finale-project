@@ -1,13 +1,17 @@
 import mainTemplate from '../tpl/main.hbs';
 import questionTemplate from '../tpl/question.hbs';
-import {questions} from './mock';
+//import {questions} from './mock';
 import {elem} from './createElement';
 import {renderUser} from "./user";
+
+let questions = [];
+
 
 
 export let resoltQustion = [0,0,0,0,0,0,0,0,0,0,];
 
 export function renderQuestionPage (curentUser) {
+	loadQuestion();
 	let mainPage = elem.getLink('container');
  	mainPage.innerHTML = mainTemplate(); 
 	
@@ -94,4 +98,33 @@ function renderQuestion(j){
 			resoltQustion[j] = 0;
 		}		
 	}	
+}
+
+
+function loadQuestion(){
+   
+
+  var xmlhttp;
+  if (window.XMLHttpRequest)
+    {// код для IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+    }
+  else
+    {// код для IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  xmlhttp.onreadystatechange=function()
+    {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+      {
+      
+      questions = JSON.parse(xmlhttp.responseText);
+      //console.log(users);
+      
+      
+      }
+    }
+  xmlhttp.open("Get","http://localhost:3001/questions",true);
+  xmlhttp.send();
+  
 }
