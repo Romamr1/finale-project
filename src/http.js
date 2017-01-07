@@ -10,7 +10,6 @@ export function postUser(){
   xmlhttp.open("POST","http://localhost:3001/users",true);
   var user = {name: "name"};
   var r = JSON.stringify(user);
-debugger;
   xmlhttp.send(r);
 }
 

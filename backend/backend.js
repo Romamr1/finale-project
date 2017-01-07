@@ -8,7 +8,9 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(cors());
+app.use(express.static(__dirname + '/../'));
+
+// app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -16,17 +18,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-// app.get('/users', function (req, res) {
-  // res.send(users);
-// });
-// 
-// app.get('/questions', function (req, res) {
-  // res.send(questions);
-// });
+app.get('/users', function (req, res) {
+res.send(users);
+});
+
+app.get('/questions', function (req, res) {
+res.send(questions);
+});
 
 app.post('/users', function (req, res) {
-	console.log('req', req.body);
-  res.send();
+console.log('req', req.body);
+res.send();
 
   //var user = {
     //name: req.body.name

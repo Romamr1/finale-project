@@ -52,11 +52,9 @@
 
 	var _http = __webpack_require__(30);
 
-	debugger;
-
+	(0, _loginPage.loadUser)();
 	(0, _http.postUser)();
-	//renderQuestionPage();
-	//loadUser();
+	(0, _render.renderQuestionPage)();
 
 /***/ },
 /* 1 */
