@@ -2,19 +2,14 @@ import loginTemplate from './login.page.hbs';
 import {elem} from '../createElement';
 import {renderUser} from "../user";
 import {renderAdmin} from "../admin";
-
+import Users from './users.api';
 
 export var curentUser = {};
 
 
 
-
-
-
 function render(){
-	make_request('Get', '/users', function(data){
-		loginPage(data);
-	});
+	Users.get_users(loginPage);	
 }
 
 
@@ -31,7 +26,7 @@ function loginPage(users) {
 
 		var login = document.getElementById("login").value + '';
 		var password = document.getElementById("password").value + '';
-		var resalt = ch ekData(login, password);
+		var resalt = chekData(login, password);
 		if (resalt.admin){	
 			curentUser = resalt;		
 			renderAdmin(resalt);
@@ -64,20 +59,5 @@ function loginPage(users) {
 }
 
 
-function make_request(method, endpoint, cb){
-  const xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange= onreadystatechange; 
-  xmlhttp.open(method, endpoint, true);
-  xmlhttp.send();
-
-  function onreadystatechange(){
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      
-      const data = JSON.parse(xmlhttp.responseText);
-      cb(data);
-      
-    }
-  }
-}
 
 export default { render };
