@@ -1,8 +1,7 @@
-import userTemplate from '../tpl/user.hbs';
-import {elem} from './createElement';
-import {renderQuestionPage} from "./render";
+import userTemplate from './user.hbs';
+import {elem} from '../createElement';
+import {render} from "../question/render.question.page";
 
-import {resoltQustion} from "./render";
 
 
 let curentUser = {};
@@ -14,5 +13,5 @@ export function renderUser(user){
 	container.innerHTML = userTemplate(curentUser);
 
 	let start = elem.getLink("start");
-	start.addEventListener('click', renderQuestionPage);
+	start.addEventListener('click', render);
 };

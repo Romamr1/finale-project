@@ -1,8 +1,8 @@
 import loginTemplate from './login.page.hbs';
 import {elem} from '../createElement';
-import {renderUser} from "../user";
-import {renderAdmin} from "../admin";
-import Users from './users.api';
+import {renderUser} from '../user/user';
+import {renderAdmin} from '../admin/admin';
+import Users from '../users.api';
 
 export var curentUser = {};
 

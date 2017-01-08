@@ -15,3 +15,7 @@ ul {
 .hiden {
 	display: none;
 }
+
+.red {	
+	background-color: red;
+}

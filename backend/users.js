@@ -7,7 +7,7 @@ module.exports = [
 	{
 		name: 'petia',
 		password: 'petia',
-		admin: false
+		admin: true
 	},
 	{
 		name: 'mashia',

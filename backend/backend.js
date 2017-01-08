@@ -10,7 +10,7 @@ var app = express();
 
 app.use(express.static(__dirname + '/../'));
 
-// app.use(cors());
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -19,24 +19,27 @@ app.use(bodyParser.json())
 
 
 app.get('/users', function (req, res) {
-res.send(users);
+ res.send(users);
 });
 
 app.get('/questions', function (req, res) {
-res.send(questions);
+ res.send(questions);
 });
 
 app.post('/users', function (req, res) {
-console.log('req', req.body);
-res.send();
+  const new_user = { 
+	name: req.body.name,
+	password: req.body.password,
+	admin: req.body.admin
+  };
 
-  //var user = {
-    //name: req.body.name
-  //};
-  //var we = req.boby;
-  //users.push(user);
-  //res.send(we);
-	//console.log('req',req.body);
+  const is_existing_user = !!users.find(u=>u.name === new_user.name);
+  if (is_existing_user){
+	return res.status(500).send();
+  }
+  
+  users.push(user);
+  res.send(user);
 });
 
 var server = app.listen(3000, function () {
