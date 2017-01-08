@@ -37,7 +37,9 @@ function onAddUser(event){
 		admin: isAdmin
 	};
 	
-	Users.post_user(newUser, onSuccess, onError);
+	Users
+		.post_user(newUser)
+		.then(onSuccess, onError);
 
 	function onSuccess(data) {
 		alert('success');

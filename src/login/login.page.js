@@ -9,7 +9,9 @@ export var curentUser = {};
 
 
 function render(){
-	Users.get_users(loginPage);	
+	Users
+		.get_users()
+		.then(loginPage);	
 }
 
 

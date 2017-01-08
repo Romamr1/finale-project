@@ -1,10 +1,9 @@
-export function make_request(endpoint, cb, err){
+export function make_get_request(endpoint){
   return fetch(endpoint)
-    .then(handleResponse)
-    .then(cb, err);
+    .then(handleResponse);
 }
 
-export function make_post_request(endpoint, postData, cb, err){
+export function make_post_request(endpoint, postData){
 
   return fetch(endpoint,{
       method: 'post',
@@ -13,8 +12,7 @@ export function make_post_request(endpoint, postData, cb, err){
         'Content-Type': 'application/json'
       })
     })
-    .then(handleResponse)
-    .then(cb, err);
+    .then(handleResponse);
 }
 
 

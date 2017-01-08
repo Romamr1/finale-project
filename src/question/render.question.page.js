@@ -7,7 +7,9 @@ import Users from '../users.api';
 let questions = [];
 
 export function render () {	
-	Users.get_question(renderQuestionPage);	
+	Users
+		.get_question()
+		.then(renderQuestionPage);	
 }
 
 
