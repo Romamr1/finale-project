@@ -1,10 +1,7 @@
 export function make_request(endpoint, cb, err){
   return fetch(endpoint)
-    .then(handleErrors)
-    .then(r=>r
-      .json()
-      .then(cb)
-    , err);
+    .then(handleResponse)
+    .then(cb, err);
 }
 
 export function make_post_request(endpoint, postData, cb, err){
@@ -16,20 +13,21 @@ export function make_post_request(endpoint, postData, cb, err){
         'Content-Type': 'application/json'
       })
     })
-    .then(handleErrors)
-    .then(r=>r
-      .json()
-      .then(cb)
-    , r=>r
-      .json()
-      .then(err)
-    );
+    .then(handleResponse)
+    .then(cb, err);
 }
 
 
-function handleErrors(response) {
-    if (!response.ok) {
-        throw response;
-    }
-    return response;
+function handleResponse(response) {
+    const promise = response.json();
+
+    return promise.then(data=>{
+      if (!response.ok) {
+          throw data;
+      }
+
+      return data;
+    });
+
+
 }
