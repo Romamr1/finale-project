@@ -13,7 +13,7 @@ function render(){
 }
 
 
-function loginPage(users) {	
+function loginPage(users) {
 	let mainPage = elem.getLink('container');
  	mainPage.innerHTML = loginTemplate();
 

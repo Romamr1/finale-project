@@ -6,6 +6,7 @@ module.exports = {
 	resolve: {
 		modulesDirectories: ['node_modules']
 	},
+	devtool: 'inline-source-map',
 	module: {
 		loaders: [
 			{

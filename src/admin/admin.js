@@ -37,22 +37,21 @@ function onAddUser(event){
 		admin: isAdmin
 	};
 	
-	Users.post_user(postResalt, JSON.stringify(newUser));
+	Users.post_user(newUser, onSuccess, onError);
 
-	function postResalt(data) {
-		if (data.error) {
-			let invalidMessage = elem.getLink("invalidMessage");
-			invalidMessage.innerHTML = data.message;
-			invalidMessage.classList.add("red");
-		}
+	function onSuccess(data) {
+		alert('success');
+	}
+
+	function onError(data){
+		let invalidMessage = elem.getLink("invalidMessage");
+		invalidMessage.innerHTML = data.message;
+		invalidMessage.classList.add("red");
 	}
 	
 }
 
 function showForm(event){
-
-	
-	
 	var addUserForm = document.getElementById('addQuestion');
 	if (addUserForm.classList.contains("hiden")) {
 		addUserForm.classList.remove("hiden");

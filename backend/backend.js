@@ -27,19 +27,25 @@ app.get('/questions', function (req, res) {
 });
 
 app.post('/users', function (req, res) {
+  console.log(req.body);
+
   const new_user = { 
 	name: req.body.name,
 	password: req.body.password,
 	admin: req.body.admin
   };
 
+  if (!new_user.name || !new_user.password){
+	return res.status(400).send({ message: 'empty data' });
+  }
+
   const is_existing_user = !!users.find(u=>u.name === new_user.name);
   if (is_existing_user){
-	return res.status(500).send();
+	return res.status(400).send({ message: 'user already exists' });
   }
   
-  users.push(user);
-  res.send(user);
+  users.push(new_user);
+  res.send(new_user);
 });
 
 var server = app.listen(3000, function () {
