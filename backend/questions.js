@@ -114,14 +114,10 @@ module.exports = [
 	},
 	{	
 		id: 10,
-		question: 'Some question?2',
-		answerType: 'checkbox',
-		answer: { 
-			a: 'some answer01',
-			b: 'some answer2',
-			c: 'some answer3'
-		},
-		rightAnswer: {a: true, b: false, c : true},
+		question: 'Some question?',
+		answerType: 'text',
+		answer: {a:'Введите ответ'},
+		rightAnswer: {a:'answer'},
 		curentCheck: ''
 	},
 ]

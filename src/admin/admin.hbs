@@ -1,14 +1,14 @@
 <div>
-	<h1>Приветствуем {{name}}</h1>
+	<h1 class="header">Приветствуем, {{name}}</h1>
 	<div>
-		<p>Вы администратор</p>
+		<h2>Вы администратор</h2>
 		<hr>
 
 		<button id = "addNewUser">Добавить пользователя</button>
 
 	</div>
 
-	<form id="addUser_Form" class="hiden" action="">
+	<form id="addUserForm" class="hiden" action="">
 	  <div>
 	    <input type="text" name="first_name" placeholder="Enter name" required id="adminLogin" class="box">
 	  </div>
@@ -16,9 +16,9 @@
 	    <input type="password" name="password" placeholder="password" required id="adminPassword" class="box">
 	  </div>
 	  <div>
-	    <input type="checkbox" name="checkbox" id="checkbox" class="box">
+	    <input type="checkbox" name="check" id="checkbox" class="box">
 	    <label for="checkbox"> админинистратор</label>
-	    <div id="invalidMessage"></div>
+	    <div id="validMessage"></div>
 	  </div>
 
 	  <button id="addUser">Add User</button>
@@ -27,8 +27,19 @@
 	
 	<button id="showQuestionForm">Добавить новый вопрос</button>
 		
-	<form id="addQuestion" class="hiden">
-		добавить новый вопрос
-	</form>
+	<div id="addQuestionForm" class="hiden">	
+		<div id="addQuestion">
+			<p>			
+				<input type="text" id="question" name="question">
+				<label for="question" id = "questionText">Введите вопрос</label>
+			</p>
+			<div id="answers"></div>
+			<button id="addAnswer">добавить ответ</button>
+			<div id="validMessageQuestion"></div>
+
+		</div>
+		<button id="addNewQuestion">Добавить вопрос</button>
+
+	</div>
 	
 </div>

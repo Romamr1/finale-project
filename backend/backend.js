@@ -26,8 +26,23 @@ app.get('/questions', function (req, res) {
  res.send(questions);
 });
 
+app.post('/questions', function (req, res) {
+  
+  const new_question = { 
+	id: questions.length,
+    question:req.body.question,
+    answerType: 'checkbox',
+    answer:req.body.answer,
+	rightAnswer:req.body.rightAnswer,
+    curentCheck: ''
+  };
+  questions.push(new_question);
+res.send(new_question);
+
+});
+
 app.post('/users', function (req, res) {
-  console.log(req.body);
+  
 
   const new_user = { 
 	name: req.body.name,

@@ -1,6 +1,7 @@
+'use strict';
 import userTemplate from './user.hbs';
 import {elem} from '../createElement';
-import {render} from "../question/render.question.page";
+import {render} from '../question/render.question.page';
 
 
 
@@ -12,6 +13,6 @@ export function renderUser(user){
 	let container = elem.getLink('container');
 	container.innerHTML = userTemplate(curentUser);
 
-	let start = elem.getLink("start");
+	let start = elem.getLink('start');
 	start.addEventListener('click', render);
-};
+}

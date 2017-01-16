@@ -1,9 +1,11 @@
-export function make_get_request(endpoint){
+'use strict';
+
+export function makeGetRequest(endpoint){
   return fetch(endpoint)
     .then(handleResponse);
 }
 
-export function make_post_request(endpoint, postData){
+export function makePostRequest(endpoint, postData){
 
   return fetch(endpoint,{
       method: 'post',

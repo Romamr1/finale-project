@@ -1,14 +1,16 @@
+'use strict';
+
 import mainTemplate from './main.hbs';
 import questionTemplate from './question.hbs';
 import {elem} from '../createElement';
-import {renderUser} from "../user/user";
+import {renderUser} from '../user/user';
 import Users from '../users.api';
 
 let questions = [];
 
 export function render () {	
 	Users
-		.get_question()
+		.getQuestion()
 		.then(renderQuestionPage);	
 }
 
@@ -17,37 +19,37 @@ let resoltQustion = [0,0,0,0,0,0,0,0,0,0];
 
 
 
-function renderQuestionPage (ques) {	
-	questions = ques;
+function renderQuestionPage (curentData) {	
+	questions = curentData;
 	let mainPage = elem.getLink('container');
  	mainPage.innerHTML = mainTemplate(); 
 	
 	let resoltButton = elem.getLink('endTest');
 	resoltButton.addEventListener('click',endTest);
 	
-	for (var i = 1; i < 11; i++) {
+	for (let i = 1; i < 11; i++) {
 		let button = elem.getLink('question' + i);
-		button.addEventListener('click',OnSubmit(i));
+		button.addEventListener('click',OnClick(i));
 	}
 }
 
 function endTest() {
  	let testResolt = 0;
 
- 	for (var i =  0; i < resoltQustion.length; i++) {
+ 	for (let i =  0; i < resoltQustion.length; i++) {
  		testResolt += resoltQustion[i];
  	}
  	alert('Ваш результат: ' + testResolt + '/10');
  	renderUser();
- };
+ }
 
-function OnSubmit(i) {
+function OnClick(i) {
 	return function() {
-		renderQuestion(i-1)
+		renderQuestion(i-1);
 		return i;
-	}
+	};
 
-};
+}
 
 
 function renderQuestion(j){
@@ -72,7 +74,7 @@ function renderQuestion(j){
 		let resolt = 0;
 		let count = 0;
 		questions[j].curentCheck = '';
-		for (var i = 0; i < answers.length; i++) {
+		for (let i = 0; i < answers.length; i++) {
 				if (answers[i].checked === true) {
 
 					for (let key in questions[j].rightAnswer) {
@@ -89,9 +91,13 @@ function renderQuestion(j){
 		for (let key in questions[j].rightAnswer) {
 			count++;
 
-	 		for (var i = 0; i < answers.length; i++) {	 			
+	 		for (let i = 0; i < answers.length; i++) {	 			
 	 			if (answers[i].value === key) {
 	 				if (answers[i].checked === questions[j].rightAnswer[key]){
+	 					let curentButton = elem.getLink('question' + j);
+	 					console.log(curentButton);
+	 					curentButton.classList.add('btn-success');
+	 					curentButton.classList.add('btn-success');
 	 					resolt++;
 	 				}
 	 				break;

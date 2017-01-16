@@ -1,10 +1,11 @@
-import { make_get_request } from './http-helpers';
-import { make_post_request } from './http-helpers';
+'use strict';
+
+import { makeGetRequest } from './http-helpers';
+import { makePostRequest } from './http-helpers';
 
 export default {
-	get_users: ()=>make_get_request('/users'),
-	get_question:()=> make_get_request('/questions'),
-	post_user: data => make_post_request('/users', data)
-}
-
-
+	getUsers: ()=>makeGetRequest('/users'),
+	getQuestion:()=> makeGetRequest('/questions'),
+	postUser: data => makePostRequest('/users', data),
+	postQuestion: data => makePostRequest('/questions', data)
+};

@@ -17,5 +17,28 @@ ul {
 }
 
 .red {	
-	background-color: red;
+	background-color: #ff9999;
 }
+
+.green {	
+	background-color: #ccffcc;
+}
+
+#addQuestion p, #addQuestion {
+	border: 1px solid #ccc;
+	padding: 5px;
+	size: auto;
+}
+
+#questionText {
+	font-size: x-large;
+	font-weight: 600;
+}
+#addQuestionForm {
+	margin: 5px;
+}
+
+#question {
+	width: 400px;
+}
+

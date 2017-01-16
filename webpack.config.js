@@ -6,8 +6,15 @@ module.exports = {
 	resolve: {
 		modulesDirectories: ['node_modules']
 	},
-	devtool: 'inline-source-map',
+	
 	module: {
+		preLoaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "jshint-loader"
+            }
+        ],
 		loaders: [
 			{
 				test: /\.hbs/,
