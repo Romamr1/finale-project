@@ -2,17 +2,24 @@ module.exports = [
 	{
 		name: 'vasia',
 		password: 'vasia',
-		admin: true	
+		admin: true,
+		count: 50,
+		resalt: 7
+
 	},
 	{
 		name: 'petia',
 		password: 'petia',
-		admin: false
+		admin: true,
+		count: 20,
+		resalt: 8
 	},
 	{
 		name: 'mashia',
 		password: '12345',
-		admin: false
+		admin: false,
+		count: 16,
+		resalt: 6
 	}
 ];
 

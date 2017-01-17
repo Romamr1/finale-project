@@ -27,18 +27,23 @@
 	
 	<button id="showQuestionForm">Добавить новый вопрос</button>
 		
-	<div id="addQuestionForm" class="hiden">	
-		<div id="addQuestion">
+	<div id="addQuestionForm" class="hiden">
+		<form id="choseQuestionTypeForm">
+			<label>Один ответ<input type="radio" name="choseQuestion" id="answerradio"></label>
+			<label>Несколько ответов<input type="radio" name="choseQuestion" id="answercheckbox"></label>
+			<label>Ответ строка<input type="radio" name="choseQuestion" id="answertext"></label>
+			<p><button type="submit">ок</button></p>
+		</form>	
+		<div id="addQuestion" class="hiden">
 			<p>			
 				<input type="text" id="question" name="question">
 				<label for="question" id = "questionText">Введите вопрос</label>
 			</p>
-			<div id="answers"></div>
-			<button id="addAnswer">добавить ответ</button>
-			<div id="validMessageQuestion"></div>
+			<div id="answerContainer">		
 
+			</div>
+			<p><button id="addNewQuestion">Добавить вопрос</button></p>
 		</div>
-		<button id="addNewQuestion">Добавить вопрос</button>
 
 	</div>
 	

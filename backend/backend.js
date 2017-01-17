@@ -31,13 +31,27 @@ app.post('/questions', function (req, res) {
   const new_question = { 
 	id: questions.length,
     question:req.body.question,
-    answerType: 'checkbox',
+    answerType: req.body.answerType,
     answer:req.body.answer,
 	rightAnswer:req.body.rightAnswer,
     curentCheck: ''
   };
   questions.push(new_question);
 res.send(new_question);
+
+});
+
+app.post('/resalt', function (req, res) {
+	for(let i=0;i<users.letgth;i++){
+		if (req.body.name === users[i].name) {
+			let resalt = req.body.resalt;
+			users[i].resalt = ((users[i].resalt * users[i].count) + resalt)/(users[i].count + 1);
+			res.send();
+			break;
+		}
+	}
+
+res.send();
 
 });
 

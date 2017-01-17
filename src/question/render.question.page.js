@@ -86,29 +86,39 @@ function renderQuestion(j){
 				}
 				
 			}
-		
+		let curentButton = elem.getLink('question' + (j+1));
+		curentButton.classList.add('btn-success');
 
-		for (let key in questions[j].rightAnswer) {
-			count++;
-
-	 		for (let i = 0; i < answers.length; i++) {	 			
-	 			if (answers[i].value === key) {
-	 				if (answers[i].checked === questions[j].rightAnswer[key]){
-	 					let curentButton = elem.getLink('question' + j);
-	 					console.log(curentButton);
-	 					curentButton.classList.add('btn-success');
-	 					curentButton.classList.add('btn-success');
-	 					resolt++;
-	 				}
-	 				break;
-	 			}
-	 		}
-		}
-		if(resolt === count){
-			resoltQustion[j] = 1;			
+		if (questions[j].answerType === 'text') {
+			if (answers[0].value == '') {
+				answers[0].setAttribute('placeholder','введите ответ');
+			} else {
+				if (answers[0].value === questions[j].rightAnswer.a) {					
+					resoltQustion[j] = 1;
+						
+				} else {
+					resoltQustion[j] = 0;
+				}
+			}
 		} else {
-			
-			resoltQustion[j] = 0;
-		}		
+			for (let key in questions[j].rightAnswer) {
+				count++;
+
+		 		for (let i = 0; i < answers.length; i++) {	 			
+		 			if (answers[i].value === key) {
+		 				if (answers[i].checked === questions[j].rightAnswer[key]){			 										
+		 					resolt++;
+		 				}
+		 				break;
+		 			}
+		 		}
+			}
+			if(resolt === count){
+				resoltQustion[j] = 1;			
+			} else {
+				
+				resoltQustion[j] = 0;
+			}		
+		}
 	}	
 }

@@ -12,7 +12,7 @@ export let elem = {
 		elem.setAttribute('type',data.answerType);
 		elem.setAttribute('name',name);
 		label.innerText = data.answer[value];
-		console.log(elem);
+		
 
 		if (data.answerType === 'text'){
 
