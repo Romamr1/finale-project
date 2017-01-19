@@ -7,8 +7,10 @@ import {renderUser} from '../user/user';
 import Users from '../users.api';
 
 let questions = [];
+let curentUser = {};
 
-export function render () {	
+export function render (user) {	
+	if (user) {curentUser = user;}
 	Users
 		.getQuestion()
 		.then(renderQuestionPage);	
@@ -39,8 +41,23 @@ function endTest() {
  	for (let i =  0; i < resoltQustion.length; i++) {
  		testResolt += resoltQustion[i];
  	}
- 	alert('Ваш результат: ' + testResolt + '/10');
- 	renderUser();
+
+ 	curentUser.resalt = testResolt;
+ 	
+
+ 	Users
+		.postTestResalt(curentUser)
+		.then(onSuccess, onError);
+
+	function onSuccess(data) {		
+		alert('Ваш результат: ' + testResolt + '/10');
+ 		renderUser(data);
+ 	}
+
+ 	function onError(data) {
+ 		alert('Произошла ошибка, приносим извинения');
+ 		renderUser();
+ 	}
  }
 
 function OnClick(i) {

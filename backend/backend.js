@@ -42,11 +42,14 @@ res.send(new_question);
 });
 
 app.post('/resalt', function (req, res) {
-	for(let i=0;i<users.letgth;i++){
+	
+	for (let i=0;i<users.length;i++){
+		console.log(req.body);
 		if (req.body.name === users[i].name) {
 			let resalt = req.body.resalt;
 			users[i].resalt = ((users[i].resalt * users[i].count) + resalt)/(users[i].count + 1);
-			res.send();
+			users[i].count++;
+			res.send(users[i]);
 			break;
 		}
 	}

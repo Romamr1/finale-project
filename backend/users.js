@@ -1,8 +1,8 @@
 module.exports = [
 	{
-		name: 'vasia',
-		password: 'vasia',
-		admin: true,
+		name: 'user',
+		password: 'user',
+		admin: false,
 		count: 50,
 		resalt: 7
 
@@ -15,9 +15,9 @@ module.exports = [
 		resalt: 8
 	},
 	{
-		name: 'mashia',
-		password: '12345',
-		admin: false,
+		name: 'admin',
+		password: 'admin',
+		admin: true,
 		count: 16,
 		resalt: 6
 	}

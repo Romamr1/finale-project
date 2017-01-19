@@ -7,5 +7,6 @@ export default {
 	getUsers: ()=>makeGetRequest('/users'),
 	getQuestion:()=> makeGetRequest('/questions'),
 	postUser: data => makePostRequest('/users', data),
-	postQuestion: data => makePostRequest('/questions', data)
+	postQuestion: data => makePostRequest('/questions', data),
+	postTestResalt: data => makePostRequest('/resalt', data)
 };

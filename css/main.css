@@ -42,3 +42,7 @@ ul {
 	width: 400px;
 }
 
+table, tr, td, th {
+	border: 1px solid #ccc;
+	padding: 10px;
+}
